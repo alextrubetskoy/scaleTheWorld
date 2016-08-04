@@ -541,60 +541,6 @@ var ranksDict = {
     "Tuvalu": 100,
     "Taiwan": 30
   }
-  
-// 4. Mean incomes for big countries
-var BCMeanIncomes = {
-  "China": [
-            int_in_range(8,9),  // 1
-            int_in_range(7,8),  // 2
-            int_in_range(8,9),  // 3
-            int_in_range(7,8),  // 4
-            int_in_range(9,10), // 5
-            int_in_range(7,8),  // 6
-            int_in_range(9,10), // 7
-            int_in_range(6,7),  // 8
-            int_in_range(10,11),// 9
-            int_in_range(5,6),  // 10
-            int_in_range(12,14),// 11
-            int_in_range(4,5),  // 12
-            int_in_range(14,16),// 13
-            int_in_range(3,4),  // 14
-            int_in_range(16,18),// 15
-            int_in_range(2,3),  // 16
-            int_in_range(19,25), //17
-            int_in_range(1,2),  // 18
-            int_in_range(25,60)  //19
-            ],
-  "India": [
-            int_in_range(8,9),  // 1
-            int_in_range(7,8),  // 2
-            int_in_range(8,9),  // 3
-            int_in_range(7,8),  // 4
-            int_in_range(9,10), // 5
-            int_in_range(7,8),  // 6
-            int_in_range(9,10), // 7
-            int_in_range(6,7),  // 8
-            int_in_range(10,11),// 9
-            int_in_range(5,6),  // 10
-            int_in_range(12,14),// 11
-            int_in_range(4,5),  // 12
-            int_in_range(14,16),// 13
-            int_in_range(3,4),  // 14
-            int_in_range(16,18),// 15
-            int_in_range(2,3),  // 16
-            int_in_range(19,25), //17
-            int_in_range(1,2),  // 18
-            ],
-  "United States": 52,
-  "Indonesia": 6,
-  "Brazil": 12,
-  "Pakistan": 4,
-  "Nigeria": 2,
-  "Bangladesh": 3,
-  "Russia": 18,
-  "Mexico": 8,
-  "Japan": 48
-}
 
 //--------------------------------------------
 // BASIC FUNCTIONS
