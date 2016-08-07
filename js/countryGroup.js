@@ -4,33 +4,31 @@
 
 // 1. F-Y SHUFFLE
 function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length, temporaryValue, randomIndex; 
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
 
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
 
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
+    return array;
 }
 
 // 2. GENERATING COUNTRIES
 function country(population, continent, region, languageFamily, languageGroup, hdi) {
     return {
-        'population': population,
-        'continent': continent,
-        'region': region,
-        'languageFamily': languageFamily,
-        'languageGroup': languageGroup,
-        'hdi': hdi
+    'population': population,
+    'continent': continent,
+    'region': region,
+    'languageFamily': languageFamily,
+    'languageGroup': languageGroup,
+    'hdi': hdi
     };
 };
 
@@ -83,7 +81,7 @@ console.log(worldPopulation, threshold);
 
 function similarity(country1, country2) {
     var c1 = countries[country1],
-        c2 = countries[country2];
+    c2 = countries[country2];
     // Calculate similarity between two countries.
     var score = 0;
     if (c1.continent == c2.continent) {         // Compare continent
@@ -104,22 +102,22 @@ console.log(similarity('India', 'United States'), similarity('India', 'Nigeria')
 function highSimilarityArray(countries) {
     // Make an array where adjacent countries have high similarity
     var keys    = Object.keys(countries),
-        keys    = shuffle(keys),
-        bank    = keys.slice(1, keys.length),
-        result  = [keys[0]];
+    keys    = shuffle(keys),
+    bank    = keys.slice(1, keys.length),
+    result  = [keys[0]];
     for (var i = 0; i < keys.length - 1; i++) {
         var compareTo = result[i];
         var simArray = bank.sort(function compare(a, b) {
             if (similarity(compareTo, a) < similarity(compareTo, b)) {
-              return 1;}
+                return 1;}
             if (similarity(compareTo, a) > similarity(compareTo, b)) {
-              return -1;}
+                return -1;}
             else {
-            return 0;}
-          });
+                return 0;}
+        });
         var closestMatch = simArray[0];
         result.push(closestMatch);
-        
+
         var index = bank.indexOf(closestMatch);
         bank.splice(index, 1);
     }
@@ -130,3 +128,52 @@ var hsa = highSimilarityArray(countries);
 console.log(hsa)
 
 console.log(similarity(hsa[hsa.length-1], hsa[hsa.length-2]));
+
+function change_pop(country, new_pop) {
+    /* Return an identical country object, except with a new population */
+    return country(new_pop, country.continent, country.region,
+                   country.languageFamily, country.languageGroup,
+                   country.hdi);
+}
+
+function group(countries) {
+    /* Return an array of arrays wherein each element array has the same
+     * or similar total population as every other. Countries may be split in
+     * the grouping process.
+     */
+    var current_group = [];
+    pop_so_far = 0;
+    for (var i = 0; i < countries.length; i++) {
+        var country = countries[i];
+        if (country.population + pop_so_far < threshold) {
+            /* add the country to the current group and continue looping */
+            current_group.push(country);
+            pop_so_far += country.population;
+        } else if (country.population + pop_so_far === threshold) {
+            /* add the country to the current group */
+            current_group.push(country);
+            /* recursively create the rest of the groups */
+            var rest_of_groups = group(countries.slice(i + 1));
+            /* prepend the current group */
+            return rest_of_groups.unshift(current_group);
+        } else {
+            /* split the country across the current group and the next 
+             * group
+             */
+            pop_taken = threshold - pop_so_far;
+            pop_remaining = country.population - pop_taken;
+            /* add the country with enough pop to fill the current group */
+            current_group.push(change_pop(country, pop_taken));
+            var rest_of_countries = countries.slice(i + 1);
+            /* add the country with the remaining pop */
+            rest_of_countries.unshift(change_pop(country, pop_remaining));
+            /* recursively create the rest of the groups */
+            var rest_of_groups = group(rest_of_countries);
+            /* prepend the current group */
+            return rest_of_groups.unshift(current_group);
+        }
+    }
+    /* this handles the case where the population does not reach the
+     * threshold */
+    return current_group;
+}

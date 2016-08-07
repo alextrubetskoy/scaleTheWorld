@@ -715,7 +715,7 @@ function getBigCountries() {
 
 var bigCountries = getBigCountries(); console.log(bigCountries);
 
-#-----------------------------------------------------
+//-----------------------------------------------------
 
 
 function make_country(population, language) {
@@ -743,7 +743,7 @@ function make_groups() {
     var pop_so_far = 0;
     var groups = [];
     for (country in countries_copy) {
-        if country.pop + pop_so_far < threshold {
+        if (country.pop + pop_so_far < threshold) {
             pop_so_far += country.pop;
         } else {
             var first_split, second_split = country, country;
@@ -755,5 +755,3 @@ function make_groups() {
         }
     }
 }
-
-
