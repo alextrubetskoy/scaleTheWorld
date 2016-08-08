@@ -33,10 +33,11 @@ function country(name, population, continent, region, languageFamily, languageGr
     };
 };
 
-// Populations from Wikipedia, 4 August 2016
+// Populations from Wikipedia, 4-8 August 2016
+// 'Americas' ('AM') counted as single continent
 // Regions from UN Geoscheme
 var countries = [
-    country('China', 1377829482, 'AS', 'EAS', 'ST', 'Sinitic', 0.727),
+    country('China',1377829482, 'AS', 'EAS', 'ST', 'Sinitic', 0.727),
     country('India', 1292826248, 'AS', 'SAS', 'IE', 'Indo-Iranian', 0.609),
     country('United States', 324153000, 'AM', 'NAM', 'IE', 'Germanic', 0.915),
     country('Indonesia', 258705000, 'AS', 'SEA', 'AN', 'Malayo-Polynesian', 0.684),
@@ -65,7 +66,17 @@ var countries = [
     country('Colombia', 48797866, 'AM', 'SAM', 'IE', 'Romance', 0.720),
     country('Tanzania', 48775567, 'AF', 'EAF', 'NC', 'South Volta', 0.521),
     country('Spain', 46438422, 'EU', 'SEU', 'IE', 'Romance', 0.876),
-    country('Kenya', 44156577, 'AF', 'EAF', 'NC', 'South Volta', 0.548)
+    country('Kenya', 44156577, 'AF', 'EAF', 'NC', 'South Volta', 0.548),
+    country('Argentina', 43590400, 'AM', 'SAM', 'IE', 'Romance', 0.836),
+    country('Ukraine', 42673911, 'EU', 'EEU', 'IE', 'Slavic', 0.747),
+    country('Algeria', 40400000, 'AF', 'NAF', 'AS', 'Semitic', 0.736),
+    country('Sudan', 39598700, 'AF', 'NAF', 'AS', 'Semitic', 0.479),
+    country('Poland', 38437239, 'EU', 'EEU', 'IE', 'Slavic', 0.843),
+    country('Iraq', 37883543, 'AS', 'WAS', 'AS', 'Semitic', 0.654),
+    country('Uganda', 36860700, 'AF', 'EAF', 'NC', 'South Volta', 0.483),
+    country('Canada', 36155487, 'AM', 'NAM', 'IE', 'Germanic', 0.913),
+    country('Morocco', 34005000, 'AF', 'NAF', 'AS', 'Semitic', 0.628),
+    country('Saudi Arabia', 33249000, 'AS', 'WAS', 'AS', 'Semitic', 0.837)
 ];
 
 var worldPopulation = (function(){
@@ -78,11 +89,7 @@ var worldPopulation = (function(){
 
 var threshold = worldPopulation / n
 
-console.log(worldPopulation, threshold);
-
-function similarity(country1, country2) {
-    var c1 = countries[country1],
-    c2 = countries[country2];
+function similarity(c1, c2) {
     // Calculate similarity between two countries.
     var score = 0;
     if (c1.continent == c2.continent) {         // Compare continent
@@ -98,14 +105,14 @@ function similarity(country1, country2) {
     return score;
 };
 
-//console.log(similarity('India', 'United States'), similarity('India', 'Nigeria'))
+//console.log(similarity(countries[1], countries[3]), similarity(countries[1], countries[12]))
 
 function highSimilarityArray(countries) {
     // Make an array where adjacent countries have high similarity
-    var keys    = Object.keys(countries),
-    keys    = shuffle(keys),
+    keys    = shuffle(countries),
     bank    = keys.slice(1, keys.length),
     result  = [keys[0]];
+    console.log(keys);
     for (var i = 0; i < keys.length - 1; i++) {
         var compareTo = result[i];
         var simArray = bank.sort(function compare(a, b) {
@@ -125,7 +132,7 @@ function highSimilarityArray(countries) {
     return result;
 }
 
-//var hsa = highSimilarityArray(countries);
+var hsa = highSimilarityArray(countries);
 //console.log(hsa)
 
 //console.log(similarity(hsa[hsa.length-1], hsa[hsa.length-2]));
@@ -180,4 +187,4 @@ function group(countries) {
     return current_group;
 }
 
-console.log(group(countries));
+console.log(group(hsa));
