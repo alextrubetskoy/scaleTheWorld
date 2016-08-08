@@ -21,8 +21,9 @@ function shuffle(array) {
 }
 
 // 2. GENERATING COUNTRIES
-function country(population, continent, region, languageFamily, languageGroup, hdi) {
+function country(name, population, continent, region, languageFamily, languageGroup, hdi) {
     return {
+    'name': name,
     'population': population,
     'continent': continent,
     'region': region,
@@ -34,38 +35,38 @@ function country(population, continent, region, languageFamily, languageGroup, h
 
 // Populations from Wikipedia, 4 August 2016
 // Regions from UN Geoscheme
-var countries = {
-    'China':            country(1377829482, 'AS', 'EAS', 'ST', 'Sinitic',           0.727),
-    'India':            country(1292826248, 'AS', 'SAS', 'IE', 'Indo-Iranian',      0.609),
-    'United States':    country(324153000,  'AM', 'NAM', 'IE', 'Germanic',          0.915),
-    'Indonesia':        country(258705000,  'AS', 'SEA', 'AN', 'Malayo-Polynesian', 0.684),
-    'Brazil':           country(206253049,  'AM', 'SAM', 'IE', 'Romance',           0.755),
-    'Pakistan':         country(194484703,  'AS', 'SAS', 'IE', 'Indo-Iranian',      0.538),
-    'Nigeria':          country(186988000,  'AF', 'WAF', 'NC', 'South Volta',       0.514),
-    'Bangladesh':       country(161157122,  'AS', 'SAS', 'IE', 'Indo-Iranian',      0.570),
-    'Russia':           country(146599183,  'EU', 'EEU', 'IE', 'Slavic',            0.798),
-    'Japan':            country(126990000,  'AS', 'EAS', 'JA', 'Japonic',           0.891),
-    'Mexico':           country(122273473,  'AM', 'CAM', 'IE', 'Romance',           0.756),
-    'Philippines':      country(103399400,  'AS', 'SEA', 'AN', 'Malayo-Polynesian', 0.668),
-    'Vietnam':          country(92700000,   'AS', 'SEA', 'AA', 'Vietic',            0.666),
-    'Ethiopia':         country(92206005,   'AF', 'EAF', 'AF', 'Semitic',           0.442),
-    'Egypt':            country(91345763,   'AF', 'NAF', 'AF', 'Semitic',           0.690),
-    'DR Congo':         country(85026000,   'AF', 'MAF', 'NC', 'South Volta',       0.433),
-    'Germany':          country(81770900,   'EU', 'WEU', 'IE', 'Germanic',          0.916),
-    'Iran':             country(79433700,   'AS', 'SAS', 'IE', 'Indo-Iranian',      0.766),
-    'Turkey':           country(78741053,   'AS', 'WAS', 'TU', 'Oghuz',             0.761),
-    'France':           country(66730000,   'EU', 'WEU', 'IE', 'Romance',           0.888),
-    'Thailand':         country(65343200,   'AS', 'SEA', 'TK', 'Tai',               0.726),
-    'United Kingdom':   country(65110000,   'EU', 'NEU', 'IE', 'Germanic',          0.907),         
-    'Italy':            country(60665551,   'EU', 'SEU', 'IE', 'Romance',           0.873),
-    'South Africa':     country(55653654,   'AF', 'SAF', 'NC', 'South Volta',       0.666),
-    'Myanmar':          country(51486253,   'AS', 'SEA', 'ST', 'Tibeto-Burman',     0.536),
-    'South Korea':      country(50801405,   'AS', 'EAS', 'KO', 'Korean',            0.898),
-    'Colombia':         country(48797866,   'AM', 'SAM', 'IE', 'Romance',           0.720),
-    'Tanzania':         country(48775567,   'AF', 'EAF', 'NC', 'South Volta',       0.521),
-    'Spain':            country(46438422,   'EU', 'SEU', 'IE', 'Romance',           0.876),
-    'Kenya':            country(44156577,   'AF', 'EAF', 'NC', 'South Volta',       0.548)
-};
+var countries = [
+    country('China', 1377829482, 'AS', 'EAS', 'ST', 'Sinitic', 0.727),
+    country('India', 1292826248, 'AS', 'SAS', 'IE', 'Indo-Iranian', 0.609),
+    country('United States', 324153000, 'AM', 'NAM', 'IE', 'Germanic', 0.915),
+    country('Indonesia', 258705000, 'AS', 'SEA', 'AN', 'Malayo-Polynesian', 0.684),
+    country('Brazil', 206253049, 'AM', 'SAM', 'IE', 'Romance', 0.755),
+    country('Pakistan', 194484703, 'AS', 'SAS', 'IE', 'Indo-Iranian', 0.538),
+    country('Nigeria', 186988000, 'AF', 'WAF', 'NC', 'South Volta', 0.514),
+    country('Bangladesh', 161157122, 'AS', 'SAS', 'IE', 'Indo-Iranian', 0.570),
+    country('Russia', 146599183, 'EU', 'EEU', 'IE', 'Slavic', 0.798),
+    country('Japan', 126990000, 'AS', 'EAS', 'JA', 'Japonic', 0.891),
+    country('Mexico', 122273473, 'AM', 'CAM', 'IE', 'Romance', 0.756),
+    country('Philippines', 103399400, 'AS', 'SEA', 'AN', 'Malayo-Polynesian', 0.668),
+    country('Vietnam', 92700000, 'AS', 'SEA', 'AA', 'Vietic', 0.666),
+    country('Ethiopia', 92206005, 'AF', 'EAF', 'AF', 'Semitic', 0.442),
+    country('Egypt', 91345763, 'AF', 'NAF', 'AF', 'Semitic', 0.690),
+    country('DR Congo', 85026000, 'AF', 'MAF', 'NC', 'South Volta', 0.433),
+    country('Germany', 81770900, 'EU', 'WEU', 'IE', 'Germanic', 0.916),
+    country('Iran', 79433700, 'AS', 'SAS', 'IE', 'Indo-Iranian', 0.766),
+    country('Turkey', 78741053, 'AS', 'WAS', 'TU', 'Oghuz', 0.761),
+    country('France', 66730000, 'EU', 'WEU', 'IE', 'Romance', 0.888),
+    country('Thailand', 65343200, 'AS', 'SEA', 'TK', 'Tai', 0.726),
+    country('United Kingdom', 65110000, 'EU', 'NEU', 'IE', 'Germanic', 0.907),         
+    country('Italy', 60665551, 'EU', 'SEU', 'IE', 'Romance', 0.873),
+    country('South Africa', 55653654, 'AF', 'SAF', 'NC', 'South Volta', 0.666),
+    country('Myanmar', 51486253, 'AS', 'SEA', 'ST', 'Tibeto-Burman', 0.536),
+    country('South Korea', 50801405, 'AS', 'EAS', 'KO', 'Korean', 0.898),
+    country('Colombia', 48797866, 'AM', 'SAM', 'IE', 'Romance', 0.720),
+    country('Tanzania', 48775567, 'AF', 'EAF', 'NC', 'South Volta', 0.521),
+    country('Spain', 46438422, 'EU', 'SEU', 'IE', 'Romance', 0.876),
+    country('Kenya', 44156577, 'AF', 'EAF', 'NC', 'South Volta', 0.548)
+];
 
 var worldPopulation = (function(){
     var sum = 0;
@@ -97,7 +98,7 @@ function similarity(country1, country2) {
     return score;
 };
 
-console.log(similarity('India', 'United States'), similarity('India', 'Nigeria'))
+//console.log(similarity('India', 'United States'), similarity('India', 'Nigeria'))
 
 function highSimilarityArray(countries) {
     // Make an array where adjacent countries have high similarity
@@ -124,14 +125,14 @@ function highSimilarityArray(countries) {
     return result;
 }
 
-var hsa = highSimilarityArray(countries);
-console.log(hsa)
+//var hsa = highSimilarityArray(countries);
+//console.log(hsa)
 
-console.log(similarity(hsa[hsa.length-1], hsa[hsa.length-2]));
+//console.log(similarity(hsa[hsa.length-1], hsa[hsa.length-2]));
 
 function change_pop(c, new_pop) {
     /* Return an identical country object, except with a new population */
-    return country(new_pop, c.continent, c.region, c.languageFamily,
+    return country(c.name, new_pop, c.continent, c.region, c.languageFamily,
                    c.languageGroup, c.hdi);
 }
 
@@ -179,5 +180,4 @@ function group(countries) {
     return current_group;
 }
 
-var vals = Object.keys(countries).map(function (key) { return countries[key]; });
-console.log(group(vals));
+console.log(group(countries));
