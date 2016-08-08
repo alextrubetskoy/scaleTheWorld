@@ -230,4 +230,4 @@ function group(countries) {
     return current_group;
 }
 
-console.log(group(hsa));
+var groupings = group(hsa);
