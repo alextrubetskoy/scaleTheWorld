@@ -129,11 +129,10 @@ console.log(hsa)
 
 console.log(similarity(hsa[hsa.length-1], hsa[hsa.length-2]));
 
-function change_pop(country, new_pop) {
+function change_pop(c, new_pop) {
     /* Return an identical country object, except with a new population */
-    return country(new_pop, country.continent, country.region,
-                   country.languageFamily, country.languageGroup,
-                   country.hdi);
+    return country(new_pop, c.continent, c.region, c.languageFamily,
+                   c.languageGroup, c.hdi);
 }
 
 function group(countries) {
@@ -155,7 +154,8 @@ function group(countries) {
             /* recursively create the rest of the groups */
             var rest_of_groups = group(countries.slice(i + 1));
             /* prepend the current group */
-            return rest_of_groups.unshift(current_group);
+            rest_of_groups.unshift(current_group);
+            return rest_of_groups;
         } else {
             /* split the country across the current group and the next 
              * group
@@ -170,10 +170,14 @@ function group(countries) {
             /* recursively create the rest of the groups */
             var rest_of_groups = group(rest_of_countries);
             /* prepend the current group */
-            return rest_of_groups.unshift(current_group);
+            rest_of_groups.unshift(current_group);
+            return rest_of_groups;
         }
     }
     /* this handles the case where the population does not reach the
      * threshold */
     return current_group;
 }
+
+var vals = Object.keys(countries).map(function (key) { return countries[key]; });
+console.log(group(vals));
