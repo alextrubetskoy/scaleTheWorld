@@ -34,7 +34,7 @@ function country(name, population, continent, region, languageFamily, languageGr
 };
 
 // Populations from Wikipedia, 4-8 August 2016
-// 'Americas' ('AM') counted as single continent
+// 'Americas and Oceania' ('AM') counted as single continent
 // Regions from UN Geoscheme
 var countries = [
     country('China',1377829482, 'AS', 'EAS', 'ST', 'Sinitic', 0.727),
@@ -50,8 +50,8 @@ var countries = [
     country('Mexico', 122273473, 'AM', 'CAM', 'IE', 'Romance', 0.756),
     country('Philippines', 103399400, 'AS', 'SEA', 'AN', 'Malayo-Polynesian', 0.668),
     country('Vietnam', 92700000, 'AS', 'SEA', 'AA', 'Vietic', 0.666),
-    country('Ethiopia', 92206005, 'AF', 'EAF', 'AF', 'Semitic', 0.442),
-    country('Egypt', 91345763, 'AF', 'NAF', 'AF', 'Semitic', 0.690),
+    country('Ethiopia', 92206005, 'AF', 'EAF', 'AS', 'Semitic', 0.442),
+    country('Egypt', 91345763, 'AF', 'NAF', 'AS', 'Semitic', 0.690),
     country('DR Congo', 85026000, 'AF', 'MAF', 'NC', 'South Volta', 0.433),
     country('Germany', 81770900, 'EU', 'WEU', 'IE', 'Germanic', 0.916),
     country('Iran', 79433700, 'AS', 'SAS', 'IE', 'Indo-Iranian', 0.766),
@@ -76,7 +76,51 @@ var countries = [
     country('Uganda', 36860700, 'AF', 'EAF', 'NC', 'South Volta', 0.483),
     country('Canada', 36155487, 'AM', 'NAM', 'IE', 'Germanic', 0.913),
     country('Morocco', 34005000, 'AF', 'NAF', 'AS', 'Semitic', 0.628),
-    country('Saudi Arabia', 33249000, 'AS', 'WAS', 'AS', 'Semitic', 0.837)
+    country('Saudi Arabia', 33249000, 'AS', 'WAS', 'AS', 'Semitic', 0.837),
+    country('Uzbekistan', 31807000, 'AS', 'CAS', 'TU', 'Karluk', 0.675),
+    country('Peru', 31488700, 'AM', 'SAM', 'IE', 'Romance', 0.734),
+    country('Malaysia', 31437936, 'AS', 'SEA', 'AN', 'Malayo-Polynesian', 0.779),
+    country('Venezuela', 31028700, 'AM', 'SAM', 'IE', 'Romance', 0.762),
+    country('Nepal', 28431500, 'AS', 'SAS', 'IE', 'Indo-Iranian', 0.548),
+    country('Ghana', 27670174, 'AF', 'WAF', 'NC', 'North Volta', 0.579),
+    country('Afghanistan', 27657145, 'AS', 'SAS', 'IE', 'Indo-Iranian', 0.465),
+    country('Yemen', 27478000, 'AS', 'WAS', 'AS', 'Semitic', 0.498),
+    country('Mozambique', 26423700, 'AF', 'EAF', 'NC', 'South Volta'),
+    country('North Korea', 25281000, 'AS', 'EAS', 'KO', 'Korean', 0.564),
+    country('Angola', 24383301, 'AF', 'MAF', 'NC', 'South Volta', 0.532),
+    country('Australia', 24141810, 'AM', 'ANZ', 'IE', 'Germanic', 0.935),
+    country('Taiwan', 23508362, 'AS', 'EAS', 'ST', 'Sinitic', 0.882),
+    country('Cameroon', 22709892, 'AF', 'MAF', 'NC', 'South Volta', 0.512),
+    country('Ivory Coast', 22671331, 'AF', 'WAF', 'NC', 'North Volta', 0.462),
+    country('Madagascar', 22434363, 'AF', 'EAF', 'AN', 'Malayo-Polynesian', 0.510),
+    country('Sri Lanka', 20966000, 'AS', 'SAS', 'IE', 'Indo-Iranian', 0.757),
+    country('Niger', 20715000,'AF', 'WAF', 'AF', 'Chadic', 0.348),
+    country('Romania', 19861000,'EU', 'EEU', 'IE', 'Romance', 0.793),
+    country('Burkina Faso', 19034397,'AF', 'WAF', 'NC', 'North Volta', 0.402),
+    country('Syria', 18564000, 'AS', 'WAS', 'AS', 'Semitic', 0.594),
+    country('Chile', 18191900, 'AM', 'SAM', 'IE', 'Romance', 0.832),
+    country('Mali', 18135000, 'AF', 'WAF', 'NC', 'North Volta', 0.419),
+    country('Kazakhstan', 17753200, 'AS', 'CAS', 'TU', 'Kipchak', 0.788),
+    country('Netherlands', 17025200, 'EU', 'WEU', 'IE', 'Germanic', 0.922),
+    country('Malawi', 16832910, 'AF', 'EAF', 'NC', 'South Volta', 0.445),
+    country('Ecuador', 16575979, 'AM', 'SAM', 'IE', 'Romance', 0.732),
+    country('Guatemala', 14799859, 'AM', 'CAM', 'IE', 'Romance', 0.627)
+    /* country('Zambia'),
+    country('Cambodia'),
+    country('Senegal'),
+    country('Chad'),
+    country('Zimbabwe'),
+    country('Guinea'),
+    country('South Sudan'),
+    country('Rwanda'),
+    country('Belgium'),
+    country('Cuba'),
+    country('Tunisia'),
+    country('Somalia'),
+    country('Haiti'),
+    country('Bolivia'),
+    country('Greece') */
+    
 ];
 
 var worldPopulation = (function(){
@@ -112,7 +156,6 @@ function highSimilarityArray(countries) {
     keys    = shuffle(countries),
     bank    = keys.slice(1, keys.length),
     result  = [keys[0]];
-    console.log(keys);
     for (var i = 0; i < keys.length - 1; i++) {
         var compareTo = result[i];
         var simArray = bank.sort(function compare(a, b) {
@@ -133,7 +176,7 @@ function highSimilarityArray(countries) {
 }
 
 var hsa = highSimilarityArray(countries);
-//console.log(hsa)
+console.log(hsa);
 
 //console.log(similarity(hsa[hsa.length-1], hsa[hsa.length-2]));
 
