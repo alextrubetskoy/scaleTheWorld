@@ -129,3 +129,4 @@ function group(countries) {
 }
 
 var groupings = group(hsa);
+console.log(groupings);
