@@ -128,7 +128,8 @@ function group(countries) {
     }
     /* this handles the case where the population does not reach the
      * threshold */
-    return current_group;
+    return [current_group];
 }
 
 var groupings = group(hsa);
+console.log(groupings);
