@@ -70,7 +70,7 @@ looper = setInterval(function() {
     div.transition()		
       .duration(200)		
       .style("opacity", .9);		
-    div.html(d.country + "<br/>"  + d.sex + ", age " + d.age + "<br/> lives on $" + d.income + " a day")
+    div.html(d.country.name + "<br/>"  + d.sex + ", age " + d.age + "<br/> lives on $" + d.income + " a day")
       .style("left", (d3.event.pageX) + "px")		
       .style("top", (d3.event.pageY) + "px");	
   })
@@ -81,7 +81,7 @@ looper = setInterval(function() {
   });
   
   groups.append("image").attr({
-    'xlink:href': function(d){return 'Faces/' + d.country + '/' + d.sex + '/' + d.age + '.png';},
+    'xlink:href': function(d){return 'Faces/' + d.country.name + '/' + d.sex + '/' + d.age + '.png';},
     x: imgXY,
     y: imgXY,
     width: 2.5 * radius,
