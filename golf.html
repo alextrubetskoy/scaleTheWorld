@@ -107,13 +107,12 @@
 	<div class="row">
 	    <div class="col-lg-12">
 		<header>
-		    <h2>We can represent the world's population with 10 people:</h2>
+		    <script>var n = prompt("How many people?");</script>
+		    <h2><script>document.write("We can represent the world's population with " + n + " people:");</script></h2>
 		</header>
 		<div id='main' role=''>
 		    <INPUT type="button" onClick="history.go(0)" VALUE="Get new people">
 		    <div id='vis'></div>
-		    
-		    <script>var n = 30;</script>
 		    <script src="js/countryData.js"></script>
 		    <script src="js/popPyramid.js"></script>
 		    <script src="js/countryGroup.js"></script>
