@@ -88,47 +88,44 @@ function change_pop(c, new_pop) {
 }
 
 function group(countries) {
-    /* Return an array of arrays wherein each element array has the same
-     * or similar total population as every other. Countries may be split in
-     * the grouping process.
-     */
+    // Return an array of arrays wherein each element array has the same
+    // or similar total population as every other. Countries may be split in
+    // the grouping process.
     var current_group = [];
     pop_so_far = 0;
     for (var i = 0; i < countries.length; i++) {
         var country = countries[i];
         if (country.population + pop_so_far < threshold) {
-            /* add the country to the current group and continue looping */
+            // add the country to the current group and continue looping
             current_group.push(country);
             pop_so_far += country.population;
         } else if (country.population + pop_so_far === threshold) {
-            /* add the country to the current group */
+            // add the country to the current group
             current_group.push(country);
-            /* recursively create the rest of the groups */
+            // recursively create the rest of the groups
             var rest_of_groups = group(countries.slice(i + 1));
-            /* prepend the current group */
+            // prepend the current group
             rest_of_groups.unshift(current_group);
             return rest_of_groups;
         } else {
-            /* split the country across the current group and the next 
-             * group
-             */
+            // split the country across the current group and the next group
             pop_taken = threshold - pop_so_far;
             pop_remaining = country.population - pop_taken;
-            /* add the country with enough pop to fill the current group */
+            // add the country with enough pop to fill the current group
             current_group.push(change_pop(country, pop_taken));
             var rest_of_countries = countries.slice(i + 1);
-            /* add the country with the remaining pop */
+            // add the country with the remaining pop
             rest_of_countries.unshift(change_pop(country, pop_remaining));
-            /* recursively create the rest of the groups */
+            // recursively create the rest of the groups
             var rest_of_groups = group(rest_of_countries);
-            /* prepend the current group */
+            // prepend the current group
             rest_of_groups.unshift(current_group);
             return rest_of_groups;
         }
     }
     /* this handles the case where the population does not reach the
      * threshold */
-    return current_group;
+    return [current_group];
 }
 
 var groupings = group(hsa);

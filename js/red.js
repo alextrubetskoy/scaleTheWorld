@@ -48,6 +48,8 @@ function intInRange(min, max) {
 }
 
 //-----------------------------------------------------
+console.log(groupings);
+
 
 function selectCountries(groupings) {
     var result = [];
