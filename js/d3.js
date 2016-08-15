@@ -43,12 +43,6 @@ force = d3.layout.force().nodes(people).links([]).size([w, h]);
 
 force.charge((radius * radius) / -4.5);
 
-force.on("tick", function(e) {
-  return vis.selectAll("g").attr("transform", function(d) {
-    return "translate(" + d.x + "," + d.y + ")";
-  });
-});
-
 counter = 0;
 
 looper = setInterval(function() {
@@ -102,3 +96,63 @@ looper = setInterval(function() {
     'stroke-width': "2px"
   });
 }, 100);
+
+var damper = 0.102
+
+groupBubbles();
+
+function groupBubbles() {
+  //hideYears();
+
+  force.on('tick', function (e) {
+    nodes.each(moveToCenter(e.alpha))
+      .attr('cx', function (d) { return d.x; })
+      .attr('cy', function (d) { return d.y; });
+  });
+
+  force.start();
+}
+
+function moveToCenter(alpha) {
+  return function (d) {
+      d.x = d.x + (center.x - d.x) * damper * alpha;
+      d.y = d.y + (center.y - d.y) * damper * alpha;
+  };
+}
+  
+function splitBubbles() {
+  showYears();
+
+  force.on('tick', function (e) {
+    bubbles.each(moveToYears(e.alpha))
+      .attr('cx', function (d) { return d.x; })
+      .attr('cy', function (d) { return d.y; });
+  });
+
+  force.start();
+}
+
+/*
+ * Sets up the layout buttons to allow for toggling between view modes.
+ */
+function setupButtons() {
+  d3.select('#toolbar')
+    .selectAll('.button')
+    .on('click', function () {
+      // Remove active class from all buttons
+      d3.selectAll('.button').classed('active', false);
+      // Find the button just clicked
+      var button = d3.select(this);
+
+      // Set it as the active button
+      button.classed('active', true);
+
+      // Get the id of the button
+      var buttonId = button.attr('id');
+
+      // Toggle the bubble chart based on
+      // the currently clicked button.
+      myBubbleChart.toggleDisplay(buttonId);
+    });
+}
+setupButtons();

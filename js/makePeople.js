@@ -249,3 +249,5 @@ selectedCountries.sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > 
 var sexes = makeSexes(),
     ages = makeAges(),
     people = makePeople(ages);
+
+console.log(people);
